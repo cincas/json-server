@@ -41,7 +41,7 @@ function createId (coll) {
   if (_.isEmpty(coll)) {
     return 1
   } else {
-    var id = _.max(coll, function (doc) {
+    var id = _.maxBy(coll, function (doc) {
       return doc[idProperty]
     })[idProperty]
 
@@ -60,13 +60,13 @@ function deepQuery (value, q) {
   if (value && q) {
     if (_.isArray(value)) {
       for (var i = 0; i < value.length; i++) {
-        if (deepQuery(value[i], q)) {
+        if (_.deepQuery(value[i], q)) {
           return true
         }
       }
     } else if (_.isObject(value) && !_.isArray(value)) {
       for (var k in value) {
-        if (deepQuery(value[k], q)) {
+        if (_.deepQuery(value[k], q)) {
           return true
         }
       }
